@@ -30,7 +30,7 @@ function findLargestPrimeFactor_Fast(number) {
     return divisor;
 }
 
-function findPrimes(number) {
+function findPrimes_sieve(number) {
     const S = [];
     S[1] = 0; // 1 - не простое число
     // заполняем решето единицами
