@@ -1,22 +1,18 @@
-function findPrimes_sieve(number) {
-    const S = [];
-    S[1] = 0; // 1 - не простое число
-    // заполняем решето единицами
-    for (let k = 2; k <= number; k++)
-        S[k] = 1;
+function sumOfPrimes(limit) {
+    return sieve(limit).reduce((acc, curr, i) => curr ? acc += i : acc, 0);
+}
 
-    for (let k = 2; k * k <= number; k++) {
-        // если k - простое (не вычеркнуто)
-        if (S[k] === 1) {
-            // то вычеркнем кратные k
-            for (let l = k * k; l <= number; l += k) {
-                S[l] = 0;
+function sieve(lim) {
+    const s = [];
+    s[1] = 0;
+    for (let i = 2; i <= lim; i++) s[i] = 1;
+
+    for (let j = 2; j * j <= lim; j++) {
+        if (s[j] === 1) {
+            for (let k = j * j; k <= lim; k += j) {
+                s[k] = 0;
             }
         }
     }
-    return S;
-}
-
-function sumOfPrimes(limit) {
-    return findPrimes_sieve(limit).reduce((acc, curr, i) => curr ? acc += i : acc, 0);
+    return s;
 }
