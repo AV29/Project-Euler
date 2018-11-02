@@ -24,3 +24,23 @@ function findLargestPolindrome(x) {
     return result;
 }
 
+function findLargestPolindrome2(x) {
+    let upperLimit = (10 ** x) - 1;
+    const lowerLimit = (10 ** (x - 1));
+    let result = 0;
+    let current = 0;
+    let i = upperLimit;
+    while (i > lowerLimit) {
+        let j = upperLimit;
+        while (j > lowerLimit) {
+            current = i*j;
+            if (isPolindrome(current) && current> result) {
+                result = current;
+                break;
+            }
+            j -= 1;
+        }
+        i -= 1;
+    }
+    return result;
+}
