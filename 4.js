@@ -17,7 +17,6 @@ function findLargestPolindrome(x) {
     for (let i = upperLimit; i > lowerLimit; i -= 1) {
         for (let j = upperLimit; j > lowerLimit; j -= 1) {
             if (isPolindrome(i * j) && i * j > result) {
-                upperLimit --;
                 result = i * j;
             }
         }
