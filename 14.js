@@ -1,44 +1,22 @@
-function fact(n) {
-    if (n === 1) {
-        return n;
-    } else {
-        return n * fact(n - 1);
+function collatz(start) {
+    const sequence = [start];
+    while (start !== 1) {
+        start % 2 === 0 ? start /= 2 : start = 3 * start + 1;
+        sequence.push(start);
     }
+    return sequence;
 }
 
-function findRoutesCount(m, n) {
-    const cache = {};
-
-    function recursive(x, y) {
-        if (x === 0 || y === 0) {
-            return 1;
-        }
-
-        if (!cache[`${x}${y}`]) {
-            cache[`${x}${y}`] = recursive(x - 1, y) + recursive(x, y - 1);
-        }
-        return cache[`${x}${y}`];
-    }
-
-    return recursive(m, n);
-}
-
-function countRoutes(x, y) {
-    const grid = [];
-    for (let i = 0; i < y + 1; i++) {
-        grid.push([]);
-    }
-    for (let i = 0; i <= y; i++) {
-        grid[i][0] = 1;
-    }
-    for (let i = 0; i <= x; i++) {
-        grid[0][i] = 1;
-    }
-
-    for (let i = 1; i <= x; i++) {
-        for (let j = 1; j <= y; j++) {
-            grid[i][j] = grid[i - 1][j] + grid[i][j - 1];
+function findLongestCollatz(upperLimit) {
+    let longestSequenceLength = 0;
+    let currentColatz = 0;
+    let result;
+    for (let i = upperLimit; i > 2; i--) {
+        currentColatz = collatz(i);
+        if (currentColatz.length > longestSequenceLength) {
+            longestSequenceLength = currentColatz.length;
+            result = {number: i, sequence: currentColatz};
         }
     }
-    return grid[x][y]
+    return result;
 }
