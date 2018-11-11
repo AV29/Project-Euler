@@ -9,9 +9,9 @@ function measurePerformance(...args) {
         result = func(...functionArgs)
     }
     const end = performance.now() - start;
-    console.group(`${func.name}(${functionArgs})`);
+    console.group(`${func.name}(${!functionArgs[0].length || functionArgs[0].length < 6 ? functionArgs : '...'}) x ${times} times`);
     console.log("Result", result);
     console.log(`Time: ${parseFloat(end.toFixed(2))} ms`);
     console.groupEnd();
-
+    return result;
 }
